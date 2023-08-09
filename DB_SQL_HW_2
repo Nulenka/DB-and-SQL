@@ -1,0 +1,28 @@
+use lesson_2;
+
+create table if not exists orders
+(
+order_id int primary key auto_increment,
+employee_id varchar(50),
+amount varchar(50),
+order_status varchar(50)
+);
+
+insert into orders(employee_id, amount, order_status) values 
+('e03', '15,00', 'open'), 
+('e01', '25,50', 'open'), 
+('e05', '100,70', 'closed'), 
+('e02', '22,18', 'open'), 
+('e04', '9,50', 'cancelled'), 
+('e04', '99,99', 'open');
+
+alter table orders
+add column order_summary varchar(50)
+
+select *, CASE
+WHEN order_status = 'open' THEN 'Order is in open state.'
+WHEN order_status = 'closed' THEN 'Order is closed.'
+WHEN order_status = 'cancelled' THEN 'Order is canseled.'
+ELSE 'fail'
+END as order_summary
+from orders;
